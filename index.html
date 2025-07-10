@@ -263,42 +263,270 @@
   <script src="../xdrew87.github.io-main/js/matrix.js"></script>
   <script src="../xdrew87.github.io-main/js/glitch.js"></script>
   <script>
-    // Enhanced particle system
-    function createParticles() {
+    // Ultra enhanced particle system
+    function createCosmicParticles() {
       const particles = document.getElementById('particles');
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 150; i++) {
         const particle = document.createElement('div');
         particle.className = 'particle';
         particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+        particle.style.animationDelay = Math.random() * 30 + 's';
+        particle.style.animationDuration = (Math.random() * 20 + 20) + 's';
+        
+        // Random colors and sizes
+        const colors = ['#00ff88', '#ff0080', '#0080ff', '#ffff00', '#8b5cf6', '#00ffff'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.boxShadow = `0 0 ${Math.random() * 20 + 10}px currentColor`;
+        
         particles.appendChild(particle);
       }
     }
 
-    // Initialize effects
-    document.addEventListener('DOMContentLoaded', () => {
-      createParticles();
+    // Cosmic hover effects
+    function addCosmicEffects() {
+      const cards = document.querySelectorAll('.project-card, .skill-category, .highlight');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.filter = 'hue-rotate(' + Math.random() * 360 + 'deg)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.filter = 'hue-rotate(0deg)';
+        });
+      });
+    }
+
+    // Dynamic background orbs
+    function createDynamicOrbs() {
+      const hero = document.querySelector('.hero');
       
-      // Initialize matrix effect
+      for (let i = 0; i < 5; i++) {
+        const orb = document.createElement('div');
+        orb.style.position = 'absolute';
+        orb.style.width = Math.random() * 200 + 100 + 'px';
+        orb.style.height = orb.style.width;
+        orb.style.background = `radial-gradient(circle, rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.1) 0%, transparent 70%)`;
+        orb.style.borderRadius = '50%';
+        orb.style.left = Math.random() * 100 + '%';
+        orb.style.top = Math.random() * 100 + '%';
+        orb.style.animation = `orbFloat ${Math.random() * 20 + 10}s ease-in-out infinite`;
+        orb.style.pointerEvents = 'none';
+        orb.style.zIndex = '0';
+        
+        hero.appendChild(orb);
+      }
+    }
+
+    // Cosmic cursor trail
+    function createCosmicCursor() {
+      const trail = [];
+      const trailLength = 20;
+
+      document.addEventListener('mousemove', (e) => {
+        const cosmic = document.createElement('div');
+        cosmic.style.position = 'fixed';
+        cosmic.style.left = e.clientX + 'px';
+        cosmic.style.top = e.clientY + 'px';
+        cosmic.style.width = '6px';
+        cosmic.style.height = '6px';
+        cosmic.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        cosmic.style.borderRadius = '50%';
+        cosmic.style.pointerEvents = 'none';
+        cosmic.style.zIndex = '9999';
+        cosmic.style.boxShadow = '0 0 10px currentColor';
+        cosmic.style.transition = 'opacity 0.5s ease';
+        
+        document.body.appendChild(cosmic);
+        trail.push(cosmic);
+
+        if (trail.length > trailLength) {
+          const old = trail.shift();
+          old.style.opacity = '0';
+          setTimeout(() => {
+            if (old.parentNode) {
+              old.parentNode.removeChild(old);
+            }
+          }, 500);
+        }
+      });
+    }
+
+    // Add floating elements animation
+    function createFloatingElements() {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        for (let i = 0; i < 3; i++) {
+          const floater = document.createElement('div');
+          floater.style.position = 'absolute';
+          floater.style.width = '20px';
+          floater.style.height = '20px';
+          floater.style.background = `radial-gradient(circle, ${['#00ff88', '#ff0080', '#0080ff'][i]} 0%, transparent 70%)`;
+          floater.style.borderRadius = '50%';
+          floater.style.left = Math.random() * 100 + '%';
+          floater.style.top = Math.random() * 100 + '%';
+          floater.style.animation = `floatAround ${Math.random() * 20 + 15}s ease-in-out infinite`;
+          floater.style.pointerEvents = 'none';
+          floater.style.zIndex = '1';
+          floater.style.opacity = '0.6';
+          
+          section.style.position = 'relative';
+          section.appendChild(floater);
+        }
+      });
+    }
+
+    // Add typing sound effect simulation
+    function addTypingEffect() {
+      const subtitle = document.querySelector('.hero-subtitle');
+      if (subtitle) {
+        const text = subtitle.textContent;
+        subtitle.textContent = '';
+        subtitle.style.width = 'auto';
+        
+        let i = 0;
+        const typeInterval = setInterval(() => {
+          subtitle.textContent += text[i];
+          i++;
+          if (i >= text.length) {
+            clearInterval(typeInterval);
+            subtitle.style.borderRight = '4px solid var(--accent-primary)';
+            setTimeout(() => {
+              subtitle.style.borderRight = 'none';
+            }, 3000);
+          }
+        }, 100);
+      }
+    }
+
+    // Enhanced card interactions
+    function enhanceCardInteractions() {
+      const cards = document.querySelectorAll('.project-card, .highlight, .skill-category');
+      
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          // Add ripple effect
+          const ripple = document.createElement('div');
+          ripple.style.position = 'absolute';
+          ripple.style.width = '20px';
+          ripple.style.height = '20px';
+          ripple.style.background = 'rgba(0, 255, 136, 0.3)';
+          ripple.style.borderRadius = '50%';
+          ripple.style.left = '50%';
+          ripple.style.top = '50%';
+          ripple.style.transform = 'translate(-50%, -50%)';
+          ripple.style.animation = 'rippleExpand 1s ease-out forwards';
+          ripple.style.pointerEvents = 'none';
+          ripple.style.zIndex = '10';
+          
+          card.style.position = 'relative';
+          card.appendChild(ripple);
+          
+          setTimeout(() => {
+            if (ripple.parentNode) {
+              ripple.parentNode.removeChild(ripple);
+            }
+          }, 1000);
+        });
+      });
+    }
+
+    // Initialize all cosmic effects
+    document.addEventListener('DOMContentLoaded', () => {
+      createCosmicParticles();
+      addCosmicEffects();
+      createDynamicOrbs();
+      createCosmicCursor();
+      createFloatingElements();
+      addTypingEffect();
+      enhanceCardInteractions();
+      
+      // Initialize matrix effect with cosmic colors
       const matrixEffect = new MatrixEffect();
       matrixEffect.init();
-      matrixEffect.setOpacity(0.1);
+      matrixEffect.setOpacity(0.15);
 
-      // Initialize glitch effect
+      // Initialize enhanced glitch effect
       const glitchEffect = new GlitchEffect();
+      glitchEffect.updateConfig({
+        duration: 500,
+        interval: 2500,
+        intensity: 7
+      });
       glitchEffect.init();
 
-      // Smooth scrolling
+      // Enhanced smooth scrolling
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
+          const target = document.querySelector(this.getAttribute('href'));
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
           });
         });
       });
+
+      // Advanced cosmic section reveals
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'cosmicReveal 1.5s ease forwards';
+            entry.target.style.transform = 'translateY(0) scale(1)';
+            entry.target.style.opacity = '1';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('.section, .project-card, .highlight, .skill-category').forEach(element => {
+        observer.observe(element);
+      });
     });
+
+    // Enhanced cosmic reveal and ripple animations
+    const enhancedStyle = document.createElement('style');
+    enhancedStyle.textContent = `
+      @keyframes cosmicReveal {
+        from {
+          opacity: 0;
+          transform: translateY(80px) scale(0.8) rotateX(20deg);
+          filter: blur(15px) hue-rotate(180deg);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1) rotateX(0deg);
+          filter: blur(0) hue-rotate(0deg);
+        }
+      }
+      
+      @keyframes rippleExpand {
+        from {
+          width: 20px;
+          height: 20px;
+          opacity: 0.8;
+        }
+        to {
+          width: 200px;
+          height: 200px;
+          opacity: 0;
+        }
+      }
+      
+      @keyframes floatAround {
+        0%, 100% { 
+          transform: translate(0, 0) rotate(0deg) scale(1);
+        }
+        25% { 
+          transform: translate(30px, -20px) rotate(90deg) scale(1.2);
+        }
+        50% { 
+          transform: translate(-20px, -40px) rotate(180deg) scale(0.8);
+        }
+        75% { 
+          transform: translate(-40px, 20px) rotate(270deg) scale(1.1);
+        }
+      }
+    `;
+    document.head.appendChild(enhancedStyle);
   </script>
 </body>
 </html>
