@@ -6,16 +6,23 @@
   <title>galmx | Cybersecurity Portfolio</title>
   <link rel="stylesheet" href="style/main.css" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Particle Background -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Matrix Rain Effect -->
+  <canvas id="matrixCanvas" class="matrix-canvas"></canvas>
+
   <nav class="navbar">
     <div class="nav-container">
       <div class="nav-logo">galmx</div>
       <ul class="nav-menu">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+        <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
+        <li><a href="#skills"><i class="fas fa-cogs"></i> Skills</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -96,9 +103,9 @@
 
         <div class="project-card">
           <div class="project-header">
-            <h3>Plusestrike</h3>
+            <h3>PulseStrike</h3>
             <div class="project-links">
-              <a href="https://github.com/xdrew87/PulseStrike.git" class="project-link"><i class="fab fa-github"></i></a>
+              <a href="https://github.com/xdrew87/PulseStrike.git" target="_blank" class="project-link"><i class="fab fa-github"></i></a>
             </div>
           </div>
           <p>High-performance DDoS simulation tool for red team stress testing and infrastructure resilience</p>
@@ -119,10 +126,10 @@
           </div>
           <p>Cyber infrastructure platform hosting VPN services, C2 frameworks, and reconnaissance tools</p>
           <div class="project-tech">
-            <span>C2</span>
-            <span>VPN</span>
-            <span>HH</span>
-            <span>Osint Tools</span>
+            <span>C2 Framework</span>
+            <span>VPN Services</span>
+            <span>Infrastructure</span>
+            <span>OSINT Tools</span>
           </div>
         </div>
 
@@ -253,25 +260,45 @@
     </footer>
   </div>
 
+  <script src="../xdrew87.github.io-main/js/matrix.js"></script>
+  <script src="../xdrew87.github.io-main/js/glitch.js"></script>
   <script>
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
+    // Enhanced particle system
+    function createParticles() {
+      const particles = document.getElementById('particles');
+      for (let i = 0; i < 100; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+        particles.appendChild(particle);
+      }
+    }
+
+    // Initialize effects
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      
+      // Initialize matrix effect
+      const matrixEffect = new MatrixEffect();
+      matrixEffect.init();
+      matrixEffect.setOpacity(0.1);
+
+      // Initialize glitch effect
+      const glitchEffect = new GlitchEffect();
+      glitchEffect.init();
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
         });
       });
     });
-
-    // Glitch effect for hero title
-    const glitchText = document.querySelector('.glitch');
-    setInterval(() => {
-      glitchText.classList.add('glitch-active');
-      setTimeout(() => {
-        glitchText.classList.remove('glitch-active');
-      }, 200);
-    }, 3000);
   </script>
 </body>
 </html>
